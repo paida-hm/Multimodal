@@ -1,0 +1,155 @@
+batch_size: 500
+checkpoint:
+collate_function: contrastive_collate
+collate_params: {}
+config: runs/PNA_qm9_NTXent_50000_123_15-07_22-46-45/pre-train_QM9.yml
+critic_loss: MSELoss
+critic_loss_params: {}
+critic_parameters:
+critic_type:
+dataset: qm9
+device: cuda
+dist_embedding: false
+eval_on_test: true
+eval_per_epochs: 0
+exclude_from_transfer: []
+expensive_log_iterations: 100
+experiment_name: NTXent_50000
+finetune: false
+force_random_split: false
+frozen_layers: []
+linear_probing_samples: 500
+log_iterations: 2
+logdir: runs
+loss_func: MultimodalNTXentLoss
+loss_params:
+  alignment_reg: 0.3
+  covariance_reg: 0.1
+  tau_1d: 0.4
+  tau_2d: 0.5
+  tau_3d: 0.5
+  uniformity_reg: 0.05
+  variance_reg: 0.1
+  weight_1d2d: 1.2
+  weight_1d3d: 1.2
+  weight_2d3d: 1.0
+lr_scheduler: WarmUpWrapper
+lr_scheduler_params:
+  cooldown: 20
+  factor: 0.6
+  min_lr: 1.0e-06
+  mode: min
+  patience: 25
+  threshold: 0.0001
+  verbose: true
+  warmup_steps:
+    - 700
+  wrapped_scheduler: ReduceLROnPlateau
+main_metric: loss
+main_metric_goal: min
+max_smiles_length: 120
+metrics:
+  - positive_similarity
+  - negative_similarity
+  - contrastive_accuracy
+  - true_negative_rate
+  - true_positive_rate
+  - uniformity
+  - alignment
+  - batch_variance
+  - dimension_covariance
+minimum_epochs: 0
+model1d_parameters:
+  dropout: 0.1
+  hidden_size: 768
+  intermediate_size: 3072
+  max_position_embeddings: 512
+  num_attention_heads: 12
+  num_hidden_layers: 6
+  project_dim: 256
+  vocab_path: ./SMILE_code/
+model1d_type: SmilesBERTEncoder
+model3d_parameters:
+  batch_norm: true
+  batch_norm_momentum: 0.93
+  dropout: 0.0
+  fourier_encodings: 4
+  hidden_dim: 20
+  hidden_edge_dim: 20
+  message_net_layers: 1
+  node_wise_output_layers: 0
+  propagation_depth: 1
+  readout_aggregators:
+    - min
+    - max
+    - mean
+  readout_batchnorm: true
+  readout_hidden_dim: 20
+  readout_layers: 1
+  reduce_func: mean
+  target_dim: 256
+  update_net_layers: 1
+model3d_type: Net3D
+model_parameters:
+  aggregators:
+    - mean
+    - max
+    - min
+    - std
+  batch_norm_momentum: 0.93
+  dropout: 0.0
+  hidden_dim: 200
+  last_batch_norm: true
+  mid_batch_norm: true
+  posttrans_layers: 1
+  pretrans_layers: 2
+  propagation_depth: 7
+  readout_aggregators:
+    - min
+    - max
+    - mean
+  readout_batchnorm: true
+  readout_hidden_dim: 200
+  readout_layers: 2
+  residual: true
+  scalers:
+    - identity
+    - amplification
+    - attenuation
+  target_dim: 256
+model_type: PNA
+models_to_save: []
+multithreaded_seeds: []
+num_conformers: 3
+num_epochs: 1000
+num_epochs_local_only: 1
+num_radial: 6
+num_train: 50000
+num_val:
+optimizer: Adam
+optimizer_params:
+  lr: 8.0e-05
+patience: 35
+pretrain_checkpoint:
+required_data:
+  - dgl_graph
+  - complete_graph3d
+  - smiles_str
+reuse_pre_train_data: false
+scheduler_step_per_batch: false
+seed: 123
+seed_data: 123
+smiles_model_path: ./SMILE_code
+smiles_pretrain_checkpoint:
+smiles_tokenizer: smiles-bert
+targets: []
+tensorboard_functions: []
+train_sampler:
+trainer: contrastive
+transfer_3d: false
+transfer_layers: []
+transferred_lr:
+use_e_features: true
+use_smiles: true
+val_per_batch: true
+vocab_path: ./SMILE_code/vocab.txt
