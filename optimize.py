@@ -7,9 +7,9 @@ import json
 import statistics
 import copy
 
-# 你的基础配置文件
-BASE_CFG = "./configs_clean/tune_QM9_homo.yml"  # 改成你那份 'homo_tune_qmugs...yml'
-TRAIN_SCRIPT = "train.py"  # 改成你实际的训练入口
+# 基础配置文件
+BASE_CFG = "./configs_clean/tune_QM9_homo.yml"  
+TRAIN_SCRIPT = "train.py"  # 训练入口
 
 
 def run_one_trial(cfg):
@@ -124,7 +124,7 @@ if __name__ == "__main__":
         "best_params": study.best_trial.params,
         "best_value": study.best_trial.value,
         "best_trial": study.best_trial.number,
-        "all_trials": all_trials,  # 🔑 这里能看到贝叶斯搜索的过程
+        "all_trials": all_trials,  # 这里能看到贝叶斯搜索的过程
     }
 
     print("Best trial:")
