@@ -9,7 +9,7 @@ multithreaded_seeds:
   - 5
   - 6
 
-pretrain_checkpoint: runs/PNA_qm9_NTXent_50000_123_26-06_15-18-07/best_checkpoint.pt
+pretrain_checkpoint: runs/PNA_qm9_NTXent_50000_123_15-07_22-46-45/best_checkpoint.pt
 transfer_layers:
   - gnn.
 
