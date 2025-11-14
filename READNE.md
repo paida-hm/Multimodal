@@ -24,8 +24,8 @@ Download it from HuggingFace:
 
 ## Dependencies
 
-- Python >= 3.8  
-- PyTorch >= 2.0  
+- Python >= 3.7  
+- PyTorch >= 1.10  
 - RDKit  
 - HuggingFace Transformers  
 - Other dependencies listed in `requirements.txt`
